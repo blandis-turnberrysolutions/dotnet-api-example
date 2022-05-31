@@ -1,0 +1,11 @@
+POST https://localhost:7075/item
+Content-Type: application/json
+
+{"Name": "Bradley"}
+
+###
+
+POST https://localhost:7075/item
+Content-Type: application/json
+
+{"Name": "Christie"}
