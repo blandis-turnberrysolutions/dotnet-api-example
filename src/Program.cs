@@ -18,11 +18,11 @@ builder.Services.AddDbContext<ItemContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "test",
+    options.AddPolicy(name: "CorsPolicy",
                       policy  =>
                       {
                           policy
-                            .WithOrigins("http://localhost:3000")
+                            .WithOrigins(builder.Configuration.GetValue<string>("CorsOrigins"))
                             .WithMethods("GET", "PUT", "DELETE", "POST")
                             .WithHeaders("Content-Type");
                       });
@@ -32,7 +32,7 @@ builder.Services.AddAutoMapper((serviceProvider, config) => {
 
 var app = builder.Build();
 
-app.UseCors("test");
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
